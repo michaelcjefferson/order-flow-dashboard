@@ -17,7 +17,9 @@ export interface Order {
   // items?
   // totalCost?
 
-  address: string;
+  // TODO: transition from string to Address type
+  fromAddress: string;
+  toAddress: string;
   expectedDelivery: Date;
 
   createdAt: Date;
