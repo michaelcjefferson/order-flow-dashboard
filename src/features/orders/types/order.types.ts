@@ -21,6 +21,7 @@ export interface Order {
   fromAddress: string;
   toAddress: string;
   expectedDelivery: Date;
+  actualDelivery: Date;
 
   createdAt: Date;
   updatedAt: Date;
