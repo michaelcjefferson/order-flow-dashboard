@@ -20,8 +20,8 @@ export interface Order {
   // TODO: transition from string to Address type
   fromAddress: string;
   toAddress: string;
-  expectedDelivery: Date;
-  actualDelivery: Date;
+  expectedDelivery?: Date | null;
+  actualDelivery?: Date | null;
 
   createdAt: Date;
   updatedAt: Date;
