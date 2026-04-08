@@ -1,7 +1,18 @@
 import { Outlet, useMatches } from "react-router-dom";
 import Header from "../components/Header";
+import { seedOrders } from "../features/orders/state/ordersSeedData";
+import { useOrdersStore } from "../features/orders/state/ordersStore";
+import { useEffect } from "react";
 
 export default function DashboardLayout() {
+  // Set up orders store with seed values to be used by inner components
+  const setOrders = useOrdersStore(store => store.setOrders);
+
+  // Only run setOrders once (on mount)
+  useEffect(() => {
+    setOrders(seedOrders);
+  }, []);
+
   const matches = useMatches();
 
   // Find last route match that has a "title" property in its handle
