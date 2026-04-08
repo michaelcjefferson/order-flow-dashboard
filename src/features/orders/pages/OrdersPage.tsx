@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useOrdersStore } from "../state/ordersStore";
 import type { Order } from "../types/order.types";
+import OrderStatusBadge from "../components/OrderStatusBadge";
 
 function OrdersPage() {
   const byID = useOrdersStore(s => s.byID);
@@ -12,7 +13,9 @@ function OrdersPage() {
   return (
     <div>
       {allOrders.map((order: Order) => (
-        <div key={order.id}><strong>{order.id}</strong> - {order.status}</div>
+        <div key={order.id}><strong>{order.id}</strong> - 
+        <OrderStatusBadge status={order.status} />
+        </div>
       ))}
     </div>
   )
