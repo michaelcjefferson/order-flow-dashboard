@@ -6,6 +6,11 @@ Two main views:
 - OrderTable - display summary of all orders, highlighting current status and ideally allowing filtering.
 - OrderDetail - display details on one specific order.
 
+### Run Instructions
+1) Clone repo
+2) Navigate to directory and run `npm install`
+3) Run `npm run dev` and navigate to `localhost:5173`
+
 ## Key Decisions
 
 ### Project Structure
