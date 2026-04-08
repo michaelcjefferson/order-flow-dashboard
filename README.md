@@ -1,73 +1,30 @@
-# React + TypeScript + Vite
+# Overview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple order status tracking dashboard, demonstrating clean and reactive front-end architecture.
 
-Currently, two official plugins are available:
+Two main views:
+- OrderTable - display summary of all orders, highlighting current status and ideally allowing filtering.
+- OrderDetail - display details on one specific order.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Key Decisions
 
-## React Compiler
+### Project Structure
+Follow domain-driven design principles to promote flexibility and clarity of communication with stakeholders - orders are a first-class entity, business logic built around this
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- /app - holds global app logic/files, eg. routes
+- /components - holds components that may be used across domains, eg. UI components
+- /features - application entities and their typing, business logic, repos etc. (domains)
+- /layouts - base app-wide page layouts
+- /services - API logic (may be used to mock API calls in this project)
+- /styles - global themes
+### Style
+- Intuitive, not flashy - components and tools (sorting, filtering, flow from summary to detail) should be familiar to users coming from other software and to new users
+- Declare theme variables in /styles/index.css, use Tailwind everywhere else - minimal CSS file management, easy on-boarding and reuse, style syntax/naming consistent from the outset
+- Desktop-first, but mobile friendly - users will predominantly be using desktop view
+### Data Entities
+Demo project - don't go too in-depth on custom typing, but clearly define Order entities and ensure Orders are robust and communicative of issues in case of malformed/missing fields. Declare types for restricted property sets, eg. OrderStatus, to more easily prevent malformed/unknown values
+### Application State
+- Zustand works well with React - good performance, easy to use. There are better choices for large scale applications but Zustand suits this scope. Keep it lean, define getters and setters and only use those to interact with data. For this app, will only deal with Order state
+- Use React memos on order table to prevent unchanged orders from re-rendering when an update on orders is triggered
+### AI Usage
+Less than usual - goal is to demonstrate decision making/development process, and to refamiliarise myself with the React/typescript landscape. For that purpose, generate snippets and use Claude for research
