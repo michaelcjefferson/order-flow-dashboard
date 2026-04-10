@@ -61,9 +61,9 @@ function generateUserID(): string {
   });
 }
 
-// Expected delivery is 2–7 days from creation
+// Expected delivery is half a day to 3 days from creation
 function generateExpectedDelivery(createdAt: Date): Date {
-  return new Date(createdAt.getTime() + randomInt(2, 7) * 86400000);
+  return new Date(createdAt.getTime() + randomInt(0.5, 3) * 86400000);
 }
 
 // -- Order creation
@@ -115,7 +115,7 @@ function shouldCancelOrder(order: Order): boolean {
     now > order.expectedDelivery;
     // now > new Date(order.expectedDelivery);
 
-  return Math.random() < (isOverdue ? 0.25 : 0.05);
+  return Math.random() < (isOverdue ? 0.25 : 0.00005);
 }
 
 function runStatusUpdates(): void {
