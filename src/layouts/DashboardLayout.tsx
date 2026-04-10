@@ -2,6 +2,7 @@ import { Outlet, useMatches } from "react-router-dom";
 import Header from "../components/Header";
 import { seedOrders } from "../features/orders/state/ordersSeedData";
 import { useOrdersStore } from "../features/orders/state/ordersStore";
+import { startOrderGenerator } from "../features/orders/services/orderGenerator";
 import { useEffect } from "react";
 
 export default function DashboardLayout() {
@@ -11,6 +12,7 @@ export default function DashboardLayout() {
   // Only run setOrders once (on mount)
   useEffect(() => {
     setOrders(seedOrders);
+    startOrderGenerator();
   }, []);
 
   const matches = useMatches();
