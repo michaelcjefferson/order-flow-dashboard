@@ -47,7 +47,7 @@ export default function OrdersPage() {
   }, [allOrders, statusFilter]);
 
   if (isLoading) return <p className="text-sm text-gray-400">Loading...</p>;
-  if (error)     return <p className="text-sm text-red-500">{error}</p>;
+  if (error) return <p className="text-sm text-red-500">{error}</p>;
 
   return (
     <div className="space-y-4">
