@@ -57,7 +57,8 @@ export default function OrdersPage() {
       </div>
 
       {/* Status filter buttons */}
-      <div className="flex gap-1 border-b border-gray-200">
+      {/* Only set display flex on larger screens - filter buttons centred on small (wrapped) screens */}
+      <div className="flex-wrap gap-1 border-b border-gray-200 sm:flex">
         {statusOptions.map(status => (
           <button
             key={status}
