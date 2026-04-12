@@ -59,6 +59,12 @@ export const useOrdersStore = create<OrdersState>((set, get) => ({
       const order = state.byID[id];
       if (!order) return state;
 
+      // Prevent duplicate updates to the same status in history (still allowed if reverting from a different status)
+      const lastStatus = order.statusHistory.at(-1)?.status;
+      if (lastStatus === status) return state;
+
+      const now = new Date();
+
       //? POST update to API, await success before proceeding
 
       return {
@@ -67,7 +73,11 @@ export const useOrdersStore = create<OrdersState>((set, get) => ({
           [id]: {
             ...order,
             status,
-            updatedAt: new Date(),
+            updatedAt: now,
+            statusHistory: [
+              ...order.statusHistory,
+              { status, startedAt: now },
+            ]
           },
         },
       };

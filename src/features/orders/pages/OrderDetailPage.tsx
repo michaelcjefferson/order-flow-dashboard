@@ -9,13 +9,14 @@ function formatDate(date: Date | null | undefined): string {
   //? use the below to get locale from browser rather than always using Japanese date formatting
   // return new Date(date).toLocaleDateString(Intl.DateTimeFormat().resolvedOptions().locale, {
   return new Date(date).toLocaleDateString('ja-JP', {
-    day: '2-digit', month: 'short', year: 'numeric',
+    day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit',
   });
 }
 
 function OrderDetailPage() {
   const { id } = useParams<{ id: string }>();
 
+  // Check that order id url param is valid
   if (id?.slice(0, 4) !== "OID-") return <p className="text-sm text-red-500">Invalid Order ID</p>;
 
   const order = useOrdersStore(state => id ? state.getOrderByID(id) : undefined);
@@ -36,7 +37,8 @@ function OrderDetailPage() {
         </div>
         <h1>{order.status}</h1>
         <div className="flex flex-col text-right">
-          <p>{order.userID} </p>
+          <p>{order.username}</p>
+          {/* <p className="text-xs text-gray-500">{order.userID} </p> */}
           <p>{formatDate(order.createdAt)}</p>
         </div>
       </div>

@@ -7,12 +7,27 @@ export enum OrderStatus {
   Cancelled = "cancelled"
 }
 
+export const ORDER_STATUS_FLOW: OrderStatus[] = [
+  OrderStatus.Pending,
+  OrderStatus.Processing,
+  OrderStatus.Shipped,
+  OrderStatus.Delivered,
+];
+
+// For history of order's status changes - consider adding other properties eg. updatedBy
+export interface OrderStatusEntry {
+  status: OrderStatus;
+  startedAt: Date;
+}
+
 // -- Main Order Entity
 export interface Order {
   id: string;
   userID: string;
+  username: string;
 
   status: OrderStatus;
+  statusHistory: OrderStatusEntry[];
 
   // items?
   // totalCost?

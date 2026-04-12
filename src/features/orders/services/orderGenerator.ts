@@ -25,6 +25,59 @@ const CITIES: { city: string; code: string }[] = [
   { city: "Zürich",     code: "CH" }, { city: "Cape Town",  code: "ZA" },
 ];
 
+const USERNAMES: string[] = [
+  "Nguyễn Minh Anh",
+  "Juan Carlos Rivera",
+  "Sofia Rossi",
+  "Liam O’Connor",
+  "Amina Hassan",
+  "Mateusz Kowalski",
+  "Chloé Dubois",
+  "Lucas Silva",
+  "Ananya Sharma",
+  "Jakub Novák",
+  "Fatima Al-Farsi",
+  "Erik Johansson",
+  "María Fernanda López",
+  "Noah Müller",
+  "Isabella Bianchi",
+  "Omar El-Sayed",
+  "Hannah Cohen",
+  "Ivan Petrov",
+  "Zeynep Kaya",
+  "Daniela Popescu",
+  "Thiago Santos",
+  "Leila Haddad",
+  "Tomáš Dvořák",
+  "Aya Nakamura",
+  "Samuel Mensah",
+  "Elena García",
+  "Youssef Benali",
+  "Freja Andersen",
+  "Arjun Patel",
+  "Marek Zieliński",
+  "Camila Torres",
+  "Nikolai Ivanov",
+  "Inès Laurent",
+  "Ravi Subramanian",
+  "Luka Kovačić",
+  "Sara Svensson",
+  "Hugo Fernández",
+  "Amir Hosseini",
+  "Petra Horváth",
+  "Diego Morales",
+  "Noura Al-Maktoum",
+  "Jonas Schmidt",
+  "Aisha Bello",
+  "Bruno Costa",
+  "Mila Petrova",
+  "Ethan Brown",
+  "Lucía Navarro",
+  "Kofi Asante",
+  "Maja Janković",
+  "Olivier Martin"
+]
+
 // -- Helpers
 
 function randomInt(min: number, max: number): number {
@@ -75,7 +128,14 @@ function createOrder(): Order {
   return {
     id:               generateOrderID(),
     userID:           generateUserID(),
+    username: randomFrom(USERNAMES),
     status:           OrderStatus.Pending,
+    statusHistory: [
+      {
+        status: OrderStatus.Pending,
+        startedAt: now,
+      }
+    ],
     fromAddress:      from,
     toAddress:        to,
     expectedDelivery: generateExpectedDelivery(now),
