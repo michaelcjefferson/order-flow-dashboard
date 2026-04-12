@@ -2,16 +2,8 @@ import clsx from 'clsx';
 import { useParams } from 'react-router-dom';
 import { useOrdersStore } from '../state/ordersStore';
 import { OrderStatus, type Order } from '../types/order.types';
-
-// Format Date into human-readable string or "-"
-function formatDate(date: Date | null | undefined): string {
-  if (!date) return '-';
-  //? use the below to get locale from browser rather than always using Japanese date formatting
-  // return new Date(date).toLocaleDateString(Intl.DateTimeFormat().resolvedOptions().locale, {
-  return new Date(date).toLocaleDateString('ja-JP', {
-    day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit',
-  });
-}
+import OrderTimeline from '../components/OrderTimeline';
+import { formatDateAndTime } from '../../../helpers/datetime';
 
 function OrderDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -30,16 +22,17 @@ function OrderDetailPage() {
 
   return (
     <div className="space-y-4">
-      <div className="top-bar flex flex-row justify-between">
-        <div className="flex flex-col text-left">
+      <div className="flex flex-col justify-between">
+        {/* <div className="flex flex-col text-left">
           <p>{order.fromAddress} </p>
           <p>{order.toAddress}</p>
-        </div>
-        <h1>{order.status}</h1>
-        <div className="flex flex-col text-right">
+        </div> */}
+        {/* <h1>{order.status}</h1> */}
+        <OrderTimeline history={order.statusHistory} fromAddress={order.fromAddress} toAddress={order.toAddress} />
+        <div className="flex flex-row text-right justify-between">
           <p>{order.username}</p>
           {/* <p className="text-xs text-gray-500">{order.userID} </p> */}
-          <p>{formatDate(order.createdAt)}</p>
+          <p>{formatDateAndTime(order.createdAt)}</p>
         </div>
       </div>
     </div>

@@ -1,19 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import type { Order } from '../types/order.types';
 import OrderStatusBadge from './OrderStatusBadge';
+import { formatDate } from '../../../helpers/datetime';
 
 interface Props {
   order: Order;
-}
-
-// Format Date into human-readable string or "-"
-function formatDate(date: Date | null | undefined): string {
-  if (!date) return '-';
-  //? use the below to get locale from browser rather than always using Japanese date formatting
-  // return new Date(date).toLocaleDateString(Intl.DateTimeFormat().resolvedOptions().locale, {
-  return new Date(date).toLocaleDateString('ja-JP', {
-    day: '2-digit', month: 'short', year: 'numeric',
-  });
 }
 
 export default function OrderRow({ order }: Props) {
