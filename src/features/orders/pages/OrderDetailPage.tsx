@@ -29,6 +29,9 @@ function OrderDetailPage() {
         </div> */}
         {/* <h1>{order.status}</h1> */}
         <OrderTimeline history={order.statusHistory} fromAddress={order.fromAddress} toAddress={order.toAddress} />
+
+        <hr className="m-8" />
+
         <div className="flex flex-row text-right justify-between">
           <p>{order.username}</p>
           {/* <p className="text-xs text-gray-500">{order.userID} </p> */}
