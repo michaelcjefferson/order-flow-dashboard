@@ -8,6 +8,8 @@ import { formatDateAndTime } from '../../../helpers/datetime';
 function OrderDetailPage() {
   const { id } = useParams<{ id: string }>();
 
+  const itera = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
   // Check that order id url param is valid
   if (id?.slice(0, 4) !== "OID-") return <p className="text-sm text-red-500">Invalid Order ID</p>;
 
@@ -28,7 +30,7 @@ function OrderDetailPage() {
           <p>{order.toAddress}</p>
         </div> */}
         {/* <h1>{order.status}</h1> */}
-        <OrderTimeline history={order.statusHistory} fromAddress={order.fromAddress} toAddress={order.toAddress} />
+        <OrderTimeline history={order.statusHistory} fromAddress={order.fromAddress} toAddress={order.toAddress} expectedDelivery={order.expectedDelivery ?? undefined } />
 
         <hr className="m-8" />
 

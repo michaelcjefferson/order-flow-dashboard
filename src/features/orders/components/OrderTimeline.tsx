@@ -9,6 +9,7 @@ type Props = {
   }[];
   fromAddress: string;
   toAddress: string;
+  expectedDelivery?: Date;
 }
 
 const ORDER_STATUS_FLOW: OrderStatus[] = [
@@ -18,7 +19,7 @@ const ORDER_STATUS_FLOW: OrderStatus[] = [
   OrderStatus.Delivered,
 ];
 
-function OrderTimeline({ history, fromAddress, toAddress }: Props) {
+function OrderTimeline({ history, fromAddress, toAddress, expectedDelivery }: Props) {
   const completedStatuses = history.map(h => h.status);
 
   return (
@@ -49,7 +50,7 @@ function OrderTimeline({ history, fromAddress, toAddress }: Props) {
             <p className={clsx("text-m font-medium capitalize", {
               "text-black": !isCompleted,
             })}>{status}</p>
-            <p className="text-s font-light">{formatShortDate(entry?.startedAt)}</p>
+            <p className="text-s font-light">{formatShortDate(status === OrderStatus.Delivered && expectedDelivery && !isCompleted ? expectedDelivery : entry?.startedAt)}</p>
           </div>
         )
       })}
