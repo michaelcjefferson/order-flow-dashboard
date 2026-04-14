@@ -20,7 +20,10 @@ export default function DashboardLayout() {
   // Find last route match that has a "title" property in its handle
   const currentMatch = matches[matches.length - 1];
 
-  const title = currentMatch.handle?.title ?? "Dashboard";
+  // Attempt to get an order ID - if successful, display it as part of the title
+  const orderID = currentMatch.params?.id ?? "";
+
+  const title = orderID ? "Order " + orderID : currentMatch.handle?.title ?? "";
 
   return (
     // Container
