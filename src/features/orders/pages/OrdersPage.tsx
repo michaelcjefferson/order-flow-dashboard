@@ -51,11 +51,6 @@ export default function OrdersPage() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold text-gray-200">Orders</h1>
-        <span className="text-sm text-gray-400">{filteredOrders.length} orders</span>
-      </div>
-
       {/* Status filter buttons */}
       {/* Only set display flex on larger screens - filter buttons centred on small (wrapped) screens */}
       <div className="flex-wrap gap-1 border-b border-gray-200 sm:flex">
@@ -75,6 +70,7 @@ export default function OrdersPage() {
             {filterLabel(status)}
           </button>
         ))}
+        <span className="ml-auto text-sm text-gray-400">{filteredOrders.length} orders</span>
       </div>
 
       <OrderTable orders={filteredOrders} />

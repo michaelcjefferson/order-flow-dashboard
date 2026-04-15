@@ -1,14 +1,10 @@
-import clsx from 'clsx';
 import { useParams } from 'react-router-dom';
 import { useOrdersStore } from '../state/ordersStore';
-import { OrderStatus, type Order } from '../types/order.types';
 import OrderTimeline from '../components/OrderTimeline';
 import { formatDateAndTime } from '../../../helpers/datetime';
 
 function OrderDetailPage() {
   const { id } = useParams<{ id: string }>();
-
-  const itera = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
   // Check that order id url param is valid
   if (id?.slice(0, 4) !== "OID-") return <p className="text-sm text-red-500">Invalid Order ID</p>;

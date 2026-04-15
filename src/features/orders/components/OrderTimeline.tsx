@@ -40,11 +40,11 @@ function OrderTimeline({ history, fromAddress, toAddress, expectedDelivery }: Pr
                 // "bg-amber-100 text-amber-800 border border-amber-400 inset-shadow-sm inset-shadow-amber-700/50": h.status === OrderStatus.Pending,
                 "bg-blue-100 text-blue-800 border-blue-400 shadow-sm shadow-blue-700/50": isCompleted && status === OrderStatus.Processing,
                 "bg-purple-100 text-purple-800 border-purple-400 shadow-sm shadow-purple-700/50": isCompleted && status === OrderStatus.Shipped,
-                "bg-green-100 text-green-800 border-green-400 shadow-sm shadow-green-700/50": isCompleted && status === OrderStatus.Delivered,
+                "bg-green-100 text-green-800 border-4 border-green-400 shadow-sm shadow-green-700/50": isCompleted && status === OrderStatus.Delivered,
                 "bg-red-100 text-red-800 border-red-400 shadow-sm shadow-red-700/50": status === OrderStatus.Cancelled,
                 "bg-white border-2 border-cyan-700/50 rounded-sm border-dotted": !isCompleted,
                 "rounded-full border-solid w-25 h-25": isCompleted && !isCurrent,
-                "rounded-4xl border-dashed": isCurrent && !isLast,
+                "rounded-4xl border-4 border-dashed w-25 h-25": isCurrent && !isLast,
               }
             )}>
             <p className={clsx("text-m font-medium capitalize", {
